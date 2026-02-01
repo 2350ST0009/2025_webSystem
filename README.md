@@ -1,60 +1,24 @@
-# 月12課題 画像投稿掲示板
+# TechFocus (Twitter-like SNS)
 
-## 概要
+PHPとMySQLで構築された、画像投稿機能付きのSNSアプリケーションです。
 
-Docker Compose を利用して手軽に構築できる、シンプルな画像投稿掲示板アプリケーションです。
+## 機能一覧
+- **ユーザー認証**: 会員登録、ログイン、ログアウト
+- **投稿機能**: テキストと画像（複数枚対応、自動リサイズ機能付き）
+- **タイムライン**:
+  - フォロー中: フォローしたユーザーの投稿のみ表示
+  - すべての投稿: 全ユーザーの投稿を時系列順に表示
+- **無限スクロール**: 画面下部に到達すると自動で過去の投稿を読み込み
+- **レスポンシブデザイン**: スマートフォンとPCの両方に対応したUI
 
----
+## 技術スタック
+- **Frontend**: HTML5, CSS3 (Custom CSS), JavaScript (Vanilla JS, Fetch API)
+- **Backend**: PHP (Native)
+- **Database**: MySQL
+- **Infrastructure**: Docker (LAMP stack)
 
-## 主な機能
+## 工夫した点
+- **非同期通信**: 投稿やフォロー、タイムラインの読み込みをJavaScriptの`fetch`で行い、ページ遷移のないスムーズな操作感を実現しました。
+- **画像処理**: Canvas APIを使用してブラウザ側で画像を圧縮・リサイズしてからサーバーに送信することで、通信量とサーバー負荷を軽減しています。
+- **SQL効率化**: サブクエリとJOINを活用し、N+1問題を回避しつつ必要なデータを効率的に取得しています。
 
--   **テキスト投稿**: ユーザーは自由にメッセージを投稿できます。
--   **自動情報付与**: 各投稿には、投稿日時と連番が自動的に付与されます。
--   **画像アップロード**: 5MBを超える大きなサイズの画像もアップロード可能です。
--   **返信機能**: 過去の投稿に対してアンカー (`>>`) を付けて返信することができます。
-
----
-
-## ディレクトリ構成
-
-ec2-user/
-
-├── Dockefile
-
-├── compose.yml
-
-├── nginx/
-
-│   └── conf.d/ default.conf
-
-└── public/ bbsimagetest.php
-
----
-
-## 構築方法
-
-1.  提出したWordファイルに記載されているIPアドレスを使用して、サーバーに接続します。
-2.  以下のコマンドを実行して、アプリケーションを起動します。
-    ```bash
-    docker compose up -d
-    ```
-3.  WebブラウザでサーバーのIPアドレスにアクセスします。
-
----
-
-## データベース設定
-
-アプリケーションを動作させるには、以下のSQLを実行してデータベースにテーブルを作成する必要があります。
-
-**テーブル名**: `bbs_entries`
-
-sql
-```sql
-CREATE TABLE `bbs_entries` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `body` TEXT NOT NULL,
-  `image_filename` TEXT DEFAULT NULL,
-  `reply_to` INT DEFAULT NULL,
-  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP
-);
-```

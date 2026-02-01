@@ -1,0 +1,10 @@
+# システムファイル
+.DS_Store
+Thumbs.db
+
+# 投稿された画像ファイルはアップしない（フォルダだけ残す）
+public/image/*
+!public/image/.gitkeep
+
+# エラーログなど
+*.log
