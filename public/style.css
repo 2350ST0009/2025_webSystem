@@ -1,41 +1,47 @@
-/* リセットと基本設定 */
+/* --- リセットと基本設定 --- */
+/* 全ての要素に対して、paddingとborderを幅(width)に含める設定 */
 * { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
-    background-color: #f0f2f5;
+    background-color: #f0f2f5; /* 背景色（少しグレーがかった白） */
+    /* システムフォントを優先的に使用する設定（Mac/Windows/Android等で見やすいフォントが自動で選ばれる） */
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: #1c1e21;
-    line-height: 1.5;
-    padding-bottom: 60px;
+    line-height: 1.5; /* 文字の行間 */
+    padding-bottom: 60px; /* スマホでスクロールした際、一番下の内容が隠れないように余白を確保 */
 }
 
+/* メインコンテンツの幅を制限し、中央寄せにする */
 .container {
-    max-width: 600px;
-    margin: 0 auto;
+    max-width: 600px; /* PCで見てもスマホのような幅に収める */
+    margin: 0 auto;   /* 左右中央寄せ */
     background-color: #fff;
-    min-height: 100vh;
-    box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    min-height: 100vh; /* 画面の高さ以上にする */
+    box-shadow: 0 0 15px rgba(0,0,0,0.05); /* ほんのり影をつけて浮き上がらせる */
 }
 
+/* --- ヘッダー（上部に固定） --- */
 header {
-    position: sticky;
+    position: sticky; /* スクロールしても上部に張り付く */
     top: 0;
-    z-index: 100;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(5px);
+    z-index: 100; /* 他の要素より手前に表示 */
+    background: rgba(255, 255, 255, 0.95); /* 半透明の白背景 */
+    backdrop-filter: blur(5px); /* すりガラス効果（iOSっぽい見た目） */
     border-bottom: 1px solid #eff3f4;
     padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
+    display: flex; /* flexboxで左右配置 */
+    justify-content: space-between; /* ロゴとログアウトボタンを左右端に配置 */
     align-items: center;
 }
 h2 { font-size: 1.2rem; font-weight: 800; color: #000; }
 
+/* ログアウトボタンのデザイン */
 .logout-btn {
     font-size: 0.85rem;
     padding: 6px 12px;
     background: #fff;
     border: 1px solid #cfd9de;
-    border-radius: 9999px;
+    border-radius: 9999px; /* カプセル型の丸み */
     color: #0f1419;
     text-decoration: none;
     cursor: pointer;
@@ -44,6 +50,7 @@ h2 { font-size: 1.2rem; font-weight: 800; color: #000; }
 }
 .logout-btn:hover { background-color: #f7f9f9; }
 
+/* --- 投稿エリア --- */
 .post-area {
     padding: 20px;
     border-bottom: 1px solid #f0f2f5;
@@ -57,10 +64,10 @@ textarea {
     width: 100%;
     height: 80px;
     border: none;
-    resize: none;
+    resize: none; /* サイズ変更ハンドルを消す */
     font-size: 1.1rem;
     font-family: inherit;
-    outline: none;
+    outline: none; /* フォーカス時の枠線を消す */
     padding: 5px 0;
 }
 textarea::placeholder { color: #536471; }
@@ -69,17 +76,19 @@ textarea::placeholder { color: #536471; }
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px solid #eff3f4;
+    border-top: 1px solid #eff3f4; /* テキストエリアとの境界線 */
     padding-top: 10px;
 }
 
-/* ★ここを変更：ファイル入力を隠して、ラベルをボタンにする */
+/* --- ファイル選択ボタンのカスタマイズ --- */
+/* デフォルトの「ファイルを選択」ボタンはダサいので隠す */
 input[type="file"] {
-    display: none; /* 本物は隠す */
+    display: none; 
 }
+/* labelタグをボタンっぽく装飾して、これをクリックさせる */
 .file-upload-label {
     font-size: 0.9rem;
-    color: #1d9bf0; /* ツイッターっぽい青 */
+    color: #1d9bf0; /* Twitterブルー */
     cursor: pointer;
     font-weight: bold;
     padding: 8px 12px;
@@ -90,7 +99,7 @@ input[type="file"] {
     gap: 5px;
 }
 .file-upload-label:hover {
-    background-color: #e8f5fd; /* 薄い青背景 */
+    background-color: #e8f5fd; /* ホバー時は薄い青背景に */
 }
 /* 選択されたファイル名を表示するエリア */
 #file-name-display {
@@ -100,9 +109,10 @@ input[type="file"] {
     max-width: 150px;
     overflow: hidden;
     white-space: nowrap;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis; /* 長すぎるファイル名は「...」にする */
 }
 
+/* ツイートボタン */
 .submit-btn {
     background-color: #1d9bf0;
     color: #fff;
@@ -117,12 +127,13 @@ input[type="file"] {
 .submit-btn:hover { background-color: #1a8cd8; }
 .submit-btn:disabled { opacity: 0.5; cursor: default; }
 
+/* --- タブ切り替え --- */
 .tabs {
     display: flex;
     border-bottom: 1px solid #eff3f4;
 }
 .tab {
-    flex: 1;
+    flex: 1; /* 均等幅にする */
     text-align: center;
     padding: 15px 0;
     font-weight: bold;
@@ -133,8 +144,9 @@ input[type="file"] {
 }
 .tab:hover { background-color: #f7f9f9; }
 .tab.active {
-    color: #0f1419;
+    color: #0f1419; /* 選択中は文字色を黒く */
 }
+/* 選択中のタブの下に青い線を表示 */
 .tab.active::after {
     content: '';
     position: absolute;
@@ -147,6 +159,7 @@ input[type="file"] {
     border-radius: 2px;
 }
 
+/* --- 投稿（タイムライン）の1件ごとのスタイル --- */
 .entry {
     padding: 15px 20px;
     border-bottom: 1px solid #eff3f4;
@@ -155,16 +168,17 @@ input[type="file"] {
     gap: 10px;
     align-items: flex-start;
 }
-.entry:hover { background-color: #f7f9f9; }
+.entry:hover { background-color: #f7f9f9; /* マウスオーバーで少し色を変える */ }
 
+/* アイコン画像がない場合のプレースホルダ（グレーの丸） */
 .user-icon-placeholder {
     width: 40px;
     height: 40px;
     background-color: #cfd9de;
     border-radius: 50%;
-    flex-shrink: 0;
+    flex-shrink: 0; /* 幅が縮まないようにする */
 }
-.entry-content { flex: 1; min-width: 0; }
+.entry-content { flex: 1; min-width: 0; } /* コンテンツ部分を残りの幅いっぱいに */
 .entry-header {
     display: flex;
     justify-content: space-between;
@@ -177,8 +191,8 @@ input[type="file"] {
     font-size: 1rem;
     color: #0f1419;
     margin-bottom: 10px;
-    white-space: pre-wrap;
-    word-wrap: break-word;
+    white-space: pre-wrap; /* 改行をそのまま表示 */
+    word-wrap: break-word; /* 長い単語を折り返す */
 }
 .entry-image {
     width: 100%;
@@ -186,11 +200,12 @@ input[type="file"] {
     border: 1px solid #cfd9de;
     margin-top: 5px;
     object-fit: cover;
-    max-height: 400px;
+    max-height: 400px; /* 縦長すぎる画像の高さを制限 */
 }
 
+/* --- フォローボタン --- */
 .follow-btn {
-    background-color: #0f1419;
+    background-color: #0f1419; /* 黒背景 */
     color: #fff;
     border: none;
     padding: 4px 12px;
@@ -201,6 +216,8 @@ input[type="file"] {
     margin-left: 8px;
 }
 .follow-btn:hover { opacity: 0.8; }
+
+/* フォロー済みバッジ */
 .followed-badge {
     font-size: 0.75rem;
     color: #536471;
@@ -210,6 +227,7 @@ input[type="file"] {
     margin-left: 8px;
 }
 
+/* 無限スクロールのローディング表示 */
 #loading, #no-more {
     text-align: center;
     padding: 20px;
@@ -219,8 +237,13 @@ input[type="file"] {
 }
 #no-more { color: #536471; font-weight: normal; }
 
+/* --- スマホ対応（レスポンシブデザイン） --- */
 @media (max-width: 600px) {
-    .container { box-shadow: none; margin-bottom: 0; }
-    .entry { padding: 12px 15px; }
+    /* 画面幅が600px以下の時（スマホ）の設定 */
+    .container { 
+        box-shadow: none; /* 影を消す */
+        margin-bottom: 0; 
+    }
+    .entry { padding: 12px 15px; } /* 余白を少し狭くする */
     header { padding: 12px 15px; }
 }

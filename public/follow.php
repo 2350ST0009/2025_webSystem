@@ -1,28 +1,42 @@
 <?php
+// データベース接続
+// Dockerのコンテナ名 'mysql' をホスト名として指定
 $dbh = new PDO('mysql:host=mysql;dbname=example_db', 'root', '');
+
+// セッションを開始（ログインユーザーの情報を取得するために必要）
 session_start();
 
+// バリデーション（入力チェック）
+// ログインしていない、またはフォロー対象のIDが送信されていない場合は処理を中断
 if (empty($_SESSION['login_user_id']) || empty($_POST['target_user_id'])) {
+    // 400 Bad Request (不正なリクエスト) を返す
     header("HTTP/1.1 400 Bad Request");
     exit;
 }
 
-// 自分のIDと、フォローしたい相手のID
-$follower_id = $_SESSION['login_user_id'];
-$followee_id = $_POST['target_user_id'];
+// 変数に代入して分かりやすくする
+$follower_id = $_SESSION['login_user_id']; // フォローする人（自分）
+$followee_id = $_POST['target_user_id'];   // フォローされる人（相手）
 
-// 自分自身はフォローできないようにする
+// 自分自身をフォローできないようにする制御
 if ($follower_id == $followee_id) {
+    // エラーメッセージをJSON形式で返却
     echo json_encode(['status' => 'error', 'message' => '自分はフォローできません']);
     exit;
 }
 
-// DBに保存（INSERT IGNOREを使うと、既にフォロー済みでもエラーにならず無視してくれる）
+// SQLの準備
+// IGNOREをつけ、エラーを無視
 $sql = "INSERT IGNORE INTO user_relationships (follower_user_id, followee_user_id) VALUES (:me, :target)";
+
 $stmt = $dbh->prepare($sql);
+
+// プレースホルダに値をバインドして実行（SQLインジェクション対策）
 $stmt->execute([
     ':me' => $follower_id,
     ':target' => $followee_id
 ]);
 
+// 処理成功をJSONでフロントエンドに通知
 echo json_encode(['status' => 'success']);
+?>
