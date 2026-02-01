@@ -17,6 +17,7 @@ PHP (Native) と MySQL を使用し、非同期通信によるモダンな操作
 
 ## ディレクトリ構成
 
+```
 2025_webSystem/
 ├── docker-compose.yml
 ├── .gitignore
@@ -27,7 +28,7 @@ PHP (Native) と MySQL を使用し、非同期通信によるモダンな操作
     ├── style.css       # デザイン定義
     ├── post.php        # 投稿処理API
     └── image/          # 画像保存ディレクトリ
-
+```
 ---
 
 ## 構築方法
