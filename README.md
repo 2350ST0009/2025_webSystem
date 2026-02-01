@@ -1,4 +1,4 @@
-# TechFocus (Twitter-like SNS)
+# Twitterもどき
 
 PHPとMySQLで構築された、画像投稿機能付きのSNSアプリケーションです。
 
