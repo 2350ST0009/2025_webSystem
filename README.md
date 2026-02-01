@@ -108,9 +108,12 @@ CREATE TABLE IF NOT EXISTS user_relationships (
     UNIQUE KEY unique_follow (follower_user_id, followee_user_id)
 );
 
+```
+
+
 # アプリケーションの起動
   以下のコマンドを実行して、アプリケーションを起動します。
     ```bash
     docker compose up -d
     ```
-3.  WebブラウザでサーバーのIPアドレスにアクセスします。
+  WebブラウザでサーバーのIPアドレスにアクセスします。
