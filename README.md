@@ -34,7 +34,7 @@
 
 AWS EC2などのサーバーにSSH接続します。
 
-Docker環境の構築手順
+##### Docker環境の構築手順
 本アプリケーションを実行するには、Docker および Docker Compose が必要です。
 以下のコマンドをサーバー内で順番に実行してください。
 ```bash
@@ -52,7 +52,7 @@ sudo usermod -aG docker ec2-user
 # グループ設定を反映させる（一度ログアウトするか、以下のコマンドを実行）
 newgrp docker
 ```
-最新版のDockerComposeのインストールです。
+#### 最新版のDockerComposeのインストール
 以下のコマンドをサーバー内で順番に実行してください。
 ```bash
 # ディレクトリ作成
@@ -85,6 +85,7 @@ chmod 777 public/image
 docker compose up -d --build
 ```
 
+#### SQLの構築
 アプリケーションを動作させるには、MySQLコンテナに接続し (`docker compose exec mysql mysql -u root -p`)、以下のSQLを実行してテーブルを作成する必要があります。
 
 ```sql
