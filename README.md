@@ -73,18 +73,18 @@ docker compose version
 3.  コードの複製
 以下のコマンドを実行して、環境をセットアップし起動します。
 
-    ```bash
-    # リポジトリの取得
-    git clone https://github.com/2350ST0009/2025_webSystem.git
-    cd 2025_webSystem
+```bash
+# リポジトリの取得
+git clone https://github.com/2350ST0009/2025_webSystem.git
+cd 2025_webSystem
 
-    # 画像保存用フォルダの作成
-    mkdir -p public/image
-    chmod 777 public/image
+# 画像保存用フォルダの作成
+mkdir -p public/image
+chmod 777 public/image
 
-    # アプリケーション起動
-    docker compose up -d --build
-    ```
+# アプリケーション起動
+docker compose up -d --build
+```
 
 4. データベース設定
 
