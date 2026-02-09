@@ -95,3 +95,18 @@ CREATE TABLE IF NOT EXISTS user_relationships (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE KEY unique_follow (follower_user_id, followee_user_id)
 );
+```
+
+## 接続手順
+
+上記のdockerやsqlを構築したら、webブラウザで接続してください。
+会員登録から始める場合はこちらで接続してください。
+
+```
+http://[IPアドレス]/register.php
+```
+
+会員登録が済んでいる場合は上記のベージからログイン画面に進むか、以下のURLで接続してください。
+```
+http://[IPアドレス]/login.php
+```
