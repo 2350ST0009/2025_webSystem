@@ -40,7 +40,7 @@
 ```bash
 # パッケージの更新とDockerのインストール
 sudo yum update -y
-sudo yum install -y docker
+sudo yum install -y docker git
 
 # Dockerサービスの起動と自動起動設定
 sudo systemctl start docker
@@ -59,22 +59,23 @@ newgrp docker
 sudo mkdir -p /usr/local/lib/docker/cli-plugins/
 
 # 最新版のダウンロード
-sudo curl -SL [https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64](https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64) -o /usr/local/lib/docker/cli-plugins/docker-compose
+sudo curl -SL https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64 -o /usr/local/lib/docker/cli-plugins/docker-compose
 
 # 実行権限の付与
 sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
 ```
-最後にバージョンを確認し、表示されればインストール完了です。
+最後にバージョンを確認し、バージョン情報が表示されればインストール完了です。
 ```bash
 docker compose version
 # 出力例: Docker Compose version v2.xx.x
 ```
 
-4.  以下のコマンドを実行して、環境をセットアップし起動します。
+3.  コードの複製
+以下のコマンドを実行して、環境をセットアップし起動します。
 
     ```bash
     # リポジトリの取得
-    git clone [https://github.com/2350ST0009/2025_webSystem.git](https://github.com/2350ST0009/2025_webSystem.git)
+    git clone https://github.com/2350ST0009/2025_webSystem.git
     cd 2025_webSystem
 
     # 画像保存用フォルダの作成
@@ -85,7 +86,7 @@ docker compose version
     docker compose up -d --build
     ```
 
-5. データベース設定
+4. データベース設定
 
 アプリケーションを動作させるには、MySQLコンテナに接続し (`docker compose exec mysql mysql -u root -p`)、以下のSQLを実行してテーブルを作成する必要があります。
 
