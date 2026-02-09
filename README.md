@@ -33,7 +33,44 @@
 ## 構築方法
 
 1.  AWS EC2などのサーバーにSSH接続します。
-2.  以下のコマンドを実行して、環境をセットアップし起動します。
+
+2.  Docker環境の構築手順
+本アプリケーションを実行するには、Docker および Docker Compose が必要です。
+以下のコマンドをサーバー内で順番に実行してください。
+```bash
+# パッケージの更新とDockerのインストール
+sudo yum update -y
+sudo yum install -y docker
+
+# Dockerサービスの起動と自動起動設定
+sudo systemctl start docker
+sudo systemctl enable docker
+
+# 現在のユーザー(ec2-user)をdockerグループに追加
+sudo usermod -aG docker ec2-user
+
+# グループ設定を反映させる（一度ログアウトするか、以下のコマンドを実行）
+newgrp docker
+```
+続いて最新版のDockerComposeをインストールします。
+以下のをサーバー内で順番に実行してください。
+```bash
+# ディレクトリ作成
+sudo mkdir -p /usr/local/lib/docker/cli-plugins/
+
+# 最新版のダウンロード
+sudo curl -SL [https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64](https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64) -o /usr/local/lib/docker/cli-plugins/docker-compose
+
+# 実行権限の付与
+sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
+```
+最後にバージョンを確認し、表示されればインストール完了です。
+```bash
+docker compose version
+# 出力例: Docker Compose version v2.xx.x
+```
+
+4.  以下のコマンドを実行して、環境をセットアップし起動します。
 
     ```bash
     # リポジトリの取得
@@ -48,11 +85,7 @@
     docker compose up -d --build
     ```
 
-3.  WebブラウザでサーバーのIPアドレスにアクセスします。
-
----
-
-## データベース設定
+5. データベース設定
 
 アプリケーションを動作させるには、MySQLコンテナに接続し (`docker compose exec mysql mysql -u root -p`)、以下のSQLを実行してテーブルを作成する必要があります。
 
