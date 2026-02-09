@@ -52,8 +52,8 @@ sudo usermod -aG docker ec2-user
 # グループ設定を反映させる（一度ログアウトするか、以下のコマンドを実行）
 newgrp docker
 ```
-続いて最新版のDockerComposeをインストールします。
-以下のをサーバー内で順番に実行してください。
+最新版のDockerComposeのインストールです。
+以下のコマンドをサーバー内で順番に実行してください。
 ```bash
 # ディレクトリ作成
 sudo mkdir -p /usr/local/lib/docker/cli-plugins/
@@ -85,7 +85,7 @@ chmod 777 public/image
 docker compose up -d --build
 ```
 
-また、アプリケーションを動作させるには、MySQLコンテナに接続し (`docker compose exec mysql mysql -u root -p`)、以下のSQLを実行してテーブルを作成する必要があります。
+アプリケーションを動作させるには、MySQLコンテナに接続し (`docker compose exec mysql mysql -u root -p`)、以下のSQLを実行してテーブルを作成する必要があります。
 
 ```sql
 USE example_db;
