@@ -70,7 +70,6 @@ docker compose version
 # 出力例: Docker Compose version v2.xx.x
 ```
 
-コードの複製
 以下のコマンドを実行して、環境をセットアップし起動します。
 
 ```bash
@@ -86,9 +85,7 @@ chmod 777 public/image
 docker compose up -d --build
 ```
 
-データベース設定
-
-アプリケーションを動作させるには、MySQLコンテナに接続し (`docker compose exec mysql mysql -u root -p`)、以下のSQLを実行してテーブルを作成する必要があります。
+また、アプリケーションを動作させるには、MySQLコンテナに接続し (`docker compose exec mysql mysql -u root -p`)、以下のSQLを実行してテーブルを作成する必要があります。
 
 ```sql
 USE example_db;
